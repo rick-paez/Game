@@ -3,17 +3,19 @@ package com.tutorial.main;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.util.Random;
 /**
  * Clase que controla el comportamiento de el primer enemigo
  * @author Ricardo Paez
  *
  */
-public class FastEnemy extends GameObject {
+public class EnemyBossBullet extends GameObject {
 
-	public FastEnemy(float x, float y, ID id,Handler handler) {
+	Random rnd = new Random();
+	public EnemyBossBullet(float x, float y, ID id,Handler handler) {
 		super(x, y, id,handler);
-		velX = 2;
-		velY = 9;
+		velX = (rnd.nextInt(5 - -5)+-5);
+		velY = 5;
 		width = 16;
 		height = 16;
 	}
@@ -23,18 +25,16 @@ public class FastEnemy extends GameObject {
 		x += velX;
 		y += velY;
 		
-		if (y <=0 || y>= Game.HEIGHT -height ) {
-			velY *=-1;
+		if(y >= Game.HEIGHT) {
+			handler.removeObject(this);
 		}
-		if (x <=0 || x>= Game.WIDTH -width ) {
-			velX *=-1;
-		}
-		handler.addObject(new Trail(x,y,ID.Trail,Color.cyan,width,height, 0.05f,handler));
+		
+		handler.addObject(new Trail(x,y,ID.Trail,new Color(rnd.nextInt(55)+200,0,rnd.nextInt(100)),width,height, 0.05f,handler));
 	}
 
 	@Override
 	public void render(Graphics g) {
-		g.setColor(Color.cyan);
+		g.setColor(new Color(rnd.nextInt(55)+200,0,rnd.nextInt(100)));
 		g.fillRect((int)x, (int)y,width, height);
 		
 	}

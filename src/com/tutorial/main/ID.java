@@ -26,5 +26,14 @@ public enum ID {
 	/**
 	 * ID enemigos inteligentes
 	 */
-	SmartEnemy();
+	SmartEnemy(), 
+	/**
+	 * ID para el jefe
+	 */
+	EnemyBoss(),
+	/**
+	 * ID para las balas
+	 * del jefe
+	 */
+	EnemyBossBullet();
 }

@@ -50,4 +50,14 @@ public class Handler {
 	public void removeObject(GameObject object) {
 		this.objectList.remove(object);
 	}
+	public void clearEnemies() {
+		LinkedList<GameObject> enemies = new LinkedList<GameObject>();
+		for(int i =0;i<objectList.size();i++) {
+			GameObject gameObject = objectList.get(i);
+			if(gameObject.id != ID.Player) {
+				enemies.add(gameObject);
+			}	
+		}
+		objectList.removeAll(enemies);
+	}
 }

@@ -17,6 +17,10 @@ public abstract class GameObject {
 	//Variables de velocidad
 	protected float velX;
 	protected float velY;
+	//Variables de tamanio
+	protected int  width;
+	protected int  height;
+	
 	//Handler
 	protected Handler handler;
 	
