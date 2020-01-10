@@ -4,7 +4,6 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-import java.util.Date;
 import java.util.Random;
 
 
@@ -36,9 +35,9 @@ public class Game extends Canvas implements Runnable{
 		this.addKeyListener(new KeyInput(handler));
 		new Window(WIDTH, HEIGHT, TITLE, this);
 		hud = new HUD();	
-		handler.addObject(new Player(WIDTH/2-32,HEIGHT/2-32,ID.Player));
+		handler.addObject(new Player(WIDTH/2-32,HEIGHT/2-32,ID.Player,handler));
 		for(int i = 0;i<20;i++)
-			handler.addObject(new BasicEnemy(rnd.nextInt(WIDTH),rnd.nextInt(HEIGHT),ID.BasicEnemy));
+			handler.addObject(new BasicEnemy(rnd.nextInt(WIDTH),rnd.nextInt(HEIGHT),ID.BasicEnemy, handler));
 	}
 	
 	/**
@@ -91,7 +90,7 @@ public class Game extends Canvas implements Runnable{
 			
 			if(System.currentTimeMillis() - timer > 1000) {
 				timer += 1000;
-				System.out.println("Timer: "+timer);
+//				System.out.println("Timer: "+timer);
 				System.out.println("FPS: "+frames);
 				frames = 0;
 			}

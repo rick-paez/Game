@@ -23,7 +23,8 @@ public class KeyInput extends KeyAdapter {
 	 */
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
-		for(GameObject gameObject: handler.objectList) {
+		for(int i =0;i<handler.objectList.size();i++) {
+			GameObject gameObject = handler.objectList.get(i);
 			if(gameObject.getId() == ID.Player) {
 				//eventos de teclado para jugador 1
 				if(key == KeyEvent.VK_W) {

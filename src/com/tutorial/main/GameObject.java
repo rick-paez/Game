@@ -17,19 +17,36 @@ public abstract class GameObject {
 	//Variables de velocidad
 	protected int velX;
 	protected int velY;
+	//Handler
+	protected Handler handler;
+	
+	
 	/**
 	 * Constructor de nuestra clase de objeto
 	 * @param x
 	 * @param y
 	 * @param id
+	 * @param handler
 	 */
-	public GameObject(int x, int y, ID id) {
+	
+	
+	public GameObject(int x, int y, ID id, Handler handler) {
 		super();
 		this.x = x;
 		this.y = y;
 		this.id = id;
+		
+		this.handler = handler;
 	}
-	
+
+	public Handler getHandler() {
+		return handler;
+	}
+
+	public void setHandler(Handler handler) {
+		this.handler = handler;
+	}
+
 	/**
 	 * Metodo que controla que hace el objeto en un tick
 	 */

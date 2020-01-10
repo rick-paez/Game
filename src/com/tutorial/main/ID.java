@@ -12,6 +12,10 @@ public enum ID {
 	 */
 	Player(),
 	/**
+	 * ID para las estelas
+	 */
+	Trail(),
+	/**
 	 * ID para los ebnemigos
 	 */
 	BasicEnemy();

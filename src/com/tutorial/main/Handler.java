@@ -18,8 +18,9 @@ public class Handler {
 	public void tick() {
 		//Iteramos por todos los objetos del juego
 		//para ejecutar su tick
-		for(GameObject tempObject: objectList) {
-			tempObject.tick();
+		for(int i =0;i<objectList.size();i++) {
+			GameObject gameObject = objectList.get(i);
+			gameObject.tick();
 		}
 	}
 	/**
@@ -30,8 +31,9 @@ public class Handler {
 	public void render(Graphics g) {
 		//Iteramos por todos los objetos del juego
 		//para ejecutar su render
-		for(GameObject tempObject: objectList) {
-			tempObject.render(g);
+		for(int i =0;i<objectList.size();i++) {
+			GameObject gameObject = objectList.get(i);
+			gameObject.render(g);
 		}
 	}
 	/**
