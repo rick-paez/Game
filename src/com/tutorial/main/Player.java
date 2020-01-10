@@ -38,11 +38,14 @@ public class Player extends GameObject {
 	public Rectangle getBounds() {
 		return new Rectangle (x,y,32,32);
 	}
-	
+	/**
+	 * Controla las colisiones con los enemigos
+	 */
 	private void collision() {
 		for(int i =0;i<handler.objectList.size();i++) {
 			GameObject gameObject = handler.objectList.get(i);
-			if(gameObject.getId() == ID.BasicEnemy ){
+			if(	gameObject.getId() == ID.BasicEnemy || 
+				gameObject.getId() == ID.FastEnemy ){
 				if(getBounds().intersects(gameObject.getBounds())) {
 					//codigo de colision
 					HUD.HEALTH -= 2;

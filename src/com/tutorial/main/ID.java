@@ -16,7 +16,11 @@ public enum ID {
 	 */
 	Trail(),
 	/**
-	 * ID para los ebnemigos
+	 * ID para los enemigos
 	 */
-	BasicEnemy();
+	BasicEnemy(),
+	/*
+	 * ID para enemigos rapidos
+	 */
+	FastEnemy();
 }

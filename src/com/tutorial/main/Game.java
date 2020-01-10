@@ -24,20 +24,26 @@ public class Game extends Canvas implements Runnable{
 	private static final String TITLE = "Construyamos un juego";
 	private Thread thread;
 	private boolean running = false;
-	private Random rnd = new Random();
+	private Random rnd;
 	private HUD hud;
 	private Handler handler;
+	private Spawn spawn;
 	/**
 	 * Constructor de la clase
 	 */
 	public Game() {
 		handler = new Handler();
 		this.addKeyListener(new KeyInput(handler));
+		
 		new Window(WIDTH, HEIGHT, TITLE, this);
-		hud = new HUD();	
+		
+		hud = new HUD();
+		rnd = new Random();
+		spawn = new Spawn(handler, hud);
+		
 		handler.addObject(new Player(WIDTH/2-32,HEIGHT/2-32,ID.Player,handler));
-		for(int i = 0;i<20;i++)
-			handler.addObject(new BasicEnemy(rnd.nextInt(WIDTH),rnd.nextInt(HEIGHT),ID.BasicEnemy, handler));
+//		for(int i = 0;i<20;i++)
+		handler.addObject(new BasicEnemy(rnd.nextInt(WIDTH),rnd.nextInt(HEIGHT),ID.BasicEnemy, handler));
 	}
 	
 	/**
@@ -124,6 +130,7 @@ public class Game extends Canvas implements Runnable{
 	private void tick() {
 		handler.tick();
 		hud.tick();
+		spawn.tick();
 	}
 
 	/**
@@ -134,7 +141,13 @@ public class Game extends Canvas implements Runnable{
 		//System.out.println("comenzando el juego");
 		new Game();
 	}
-
+	/**
+	 * MAntiene una variable dentrop de los limites
+	 * @param var
+	 * @param min
+	 * @param max
+	 * @return
+	 */
 	public static int clamp (int var, int min, int max) {
 		if (var >= max)
 			return max;
