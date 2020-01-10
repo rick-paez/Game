@@ -4,7 +4,6 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-import java.util.Random;
 
 
 /**
@@ -25,27 +24,25 @@ public class Game extends Canvas implements Runnable{
 	private Thread thread;
 	private boolean running = false;
 	
-	private Random rnd;
+	
 	private Handler handler;
 	/**
 	 * Constructor de la clase
 	 */
 	public Game() {
-		new Window(WIDTH, HEIGHT, TITLE, this);
 		handler = new Handler();
-		rnd = new Random();
-		for(int i =0; i<50; i++) {
-//			handler.addObject(new Player(rnd.nextInt(WIDTH),rnd.nextInt(HEIGHT),ID.Player));
-			handler.addObject(new Player(0,0,ID.Player));
-		}
-		
+		this.addKeyListener(new KeyInput(handler));
+		new Window(WIDTH, HEIGHT, TITLE, this);
+			
+		handler.addObject(new Player(WIDTH/2-32,HEIGHT/2-32,ID.Player));
+		handler.addObject(new Player(WIDTH/2+64,HEIGHT/2-32,ID.Player2));
 	}
 	
 	/**
 	 * Comienza el thread del juego
 	 */
 	public synchronized void start() {
-		System.out.println("Juego Comenzado");
+//		System.out.println("Juego Comenzado");
 		thread = new Thread(this);
 		
 		thread.start();
@@ -57,7 +54,7 @@ public class Game extends Canvas implements Runnable{
 	 * Detiene el thread del juego
 	 */
 	public synchronized void stop() {
-		System.out.println("Juego terminado");
+//		System.out.println("Juego terminado");
 		try {
 			thread.join();
 			running = false;
@@ -69,10 +66,10 @@ public class Game extends Canvas implements Runnable{
 	
 	@Override
 	public void run() {
-		System.out.println("Entrando al metodo run");
+//		System.out.println("Entrando al metodo run");
 		long lastTime = System.nanoTime();
-		double amountofTicks = 60.0;
-		double ns = 1000000000 /amountofTicks;
+		double amountOfTicks = 60.0;
+		double ns = 1000000000 /amountOfTicks;
 		double delta = 0;
 		long timer = System.currentTimeMillis();
 		int frames = 0;
@@ -91,7 +88,7 @@ public class Game extends Canvas implements Runnable{
 			
 			if(System.currentTimeMillis() - timer > 1000) {
 				timer += 1000;
-				System.out.println("FPS: "+frames);
+				//System.out.println("FPS: "+frames);
 				frames = 0;
 			}
 		}

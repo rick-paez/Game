@@ -10,12 +10,10 @@ import java.util.Random;
  */
 public class Player extends GameObject {
 	
-	private Random rnd;
+	
 	public Player(int x, int y, ID id) {
 		super(x, y, id);
-		rnd = new Random();
-		velX = rnd.nextInt(5)+1;
-		velY = rnd.nextInt(5);
+		
 	}
 
 	@Override
@@ -26,7 +24,10 @@ public class Player extends GameObject {
 
 	@Override
 	public void render(Graphics g) {
-		g.setColor(Color.white);
+		if(id == ID.Player)
+			g.setColor(Color.white);
+		if(id == ID.Player2)
+			g.setColor(Color.red);
 		g.fillRect(x, y, 32, 32);
 		
 	}
