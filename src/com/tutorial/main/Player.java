@@ -11,7 +11,7 @@ import java.awt.Rectangle;
 public class Player extends GameObject {
 	
 	
-	public Player(int x, int y, ID id, Handler handler) {
+	public Player(float x, float y, ID id, Handler handler) {
 		super(x, y, id,handler);
 	}
 
@@ -30,13 +30,13 @@ public class Player extends GameObject {
 	public void render(Graphics g) {
 		if(id == ID.Player)
 			g.setColor(Color.white);
-		g.fillRect(x, y, 32, 32);
+		g.fillRect((int)x, (int)y, 32, 32);
 		
 	}
 
 	@Override
 	public Rectangle getBounds() {
-		return new Rectangle (x,y,32,32);
+		return new Rectangle ((int)x,(int)y,32,32);
 	}
 	/**
 	 * Controla las colisiones con los enemigos
@@ -45,7 +45,8 @@ public class Player extends GameObject {
 		for(int i =0;i<handler.objectList.size();i++) {
 			GameObject gameObject = handler.objectList.get(i);
 			if(	gameObject.getId() == ID.BasicEnemy || 
-				gameObject.getId() == ID.FastEnemy ){
+				gameObject.getId() == ID.FastEnemy ||
+				gameObject.getId() == ID.SmartEnemy){
 				if(getBounds().intersects(gameObject.getBounds())) {
 					//codigo de colision
 					HUD.HEALTH -= 2;

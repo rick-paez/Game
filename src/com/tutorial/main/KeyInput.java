@@ -11,12 +11,23 @@ import java.awt.event.KeyEvent;
  */
 public class KeyInput extends KeyAdapter {
 	private Handler handler;
+	
+	/**
+	 * Para arreglar el problema de las teclas 
+	 */
+	private boolean[] keyDown = new boolean[4];
+	
+	
 	/**
 	 * Constructor de la clase
 	 * @param handler
 	 */
 	public KeyInput(Handler handler) {
 		this.handler = handler;
+		keyDown[0] = false;
+		keyDown[1] = false;
+		keyDown[2] = false;
+		keyDown[3] = false;
 	}
 	/**
 	 * Eventos de teclado al presionar
@@ -29,15 +40,19 @@ public class KeyInput extends KeyAdapter {
 				//eventos de teclado para jugador 1
 				if(key == KeyEvent.VK_W) {
 					gameObject.setVelY(-5);
+					keyDown[0] = true;
 				}
 				if(key == KeyEvent.VK_S) {
 					gameObject.setVelY(5);
+					keyDown[1] = true;
 				}
 				if(key == KeyEvent.VK_D) {
 					gameObject.setVelX(5);
+					keyDown[2] = true;
 				}
 				if(key == KeyEvent.VK_A) {
 					gameObject.setVelX(-5);
+					keyDown[3] = true;
 				}
 				
 			}
@@ -55,18 +70,25 @@ public class KeyInput extends KeyAdapter {
 			if(gameObject.getId() == ID.Player) {
 				//eventos de teclado para jugador 1
 				if(key == KeyEvent.VK_W) {
-					gameObject.setVelY(0);
+					keyDown[0] = false;
 				}
 				if(key == KeyEvent.VK_S) {
-					gameObject.setVelY(0);
+					keyDown[1] = false;
 				}
 				if(key == KeyEvent.VK_D) {
-					gameObject.setVelX(0);
+					keyDown[2] = false;
 				}
 				if(key == KeyEvent.VK_A) {
+					keyDown[3] = false;
+				}
+				//Movimiento vertical
+				if(!keyDown[0] && !keyDown[1]) {
+					gameObject.setVelY(0);
+				}
+				//Movimiento horizontal
+				if(!keyDown[2] && !keyDown[3]) {
 					gameObject.setVelX(0);
 				}
-				
 			}
 			
 		}

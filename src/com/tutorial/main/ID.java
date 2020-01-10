@@ -22,5 +22,9 @@ public enum ID {
 	/*
 	 * ID para enemigos rapidos
 	 */
-	FastEnemy();
+	FastEnemy(),
+	/**
+	 * ID enemigos inteligentes
+	 */
+	SmartEnemy();
 }
