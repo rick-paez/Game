@@ -11,14 +11,18 @@ import java.awt.event.KeyEvent;
  */
 public class KeyInput extends KeyAdapter {
 	private Handler handler;
-	
+	/**
+	 * Constructor de la clase
+	 * @param handler
+	 */
 	public KeyInput(Handler handler) {
 		this.handler = handler;
 	}
-	
+	/**
+	 * Eventos de teclado al presionar
+	 */
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
-		System.out.println(key);
 		for(GameObject gameObject: handler.objectList) {
 			if(gameObject.getId() == ID.Player) {
 				//eventos de teclado para jugador 1
@@ -36,27 +40,16 @@ public class KeyInput extends KeyAdapter {
 				}
 				
 			}
-			if(gameObject.getId() == ID.Player2) {
-				//eventos de teclado para jugador 1
-				if(key == KeyEvent.VK_UP) {
-					gameObject.setVelY(-5);
-				}
-				if(key == KeyEvent.VK_DOWN) {
-					gameObject.setVelY(5);
-				}
-				if(key == KeyEvent.VK_RIGHT) {
-					gameObject.setVelX(5);
-				}
-				if(key == KeyEvent.VK_LEFT) {
-					gameObject.setVelX(-5);
-				}
-			}
+			
 		}
+		if(key == KeyEvent.VK_ESCAPE)
+			System.exit(1);
 	}
-	
+	/**
+	 * Eventos de soltar teclas
+	 */
 	public void keyReleased(KeyEvent e) {
 		int key = e.getKeyCode();
-		System.out.println(key);
 		for(GameObject gameObject: handler.objectList) {
 			if(gameObject.getId() == ID.Player) {
 				//eventos de teclado para jugador 1
@@ -74,21 +67,7 @@ public class KeyInput extends KeyAdapter {
 				}
 				
 			}
-			if(gameObject.getId() == ID.Player2) {
-				//eventos de teclado para jugador 1
-				if(key == KeyEvent.VK_UP) {
-					gameObject.setVelY(0);
-				}
-				if(key == KeyEvent.VK_DOWN) {
-					gameObject.setVelY(0);
-				}
-				if(key == KeyEvent.VK_RIGHT) {
-					gameObject.setVelX(0);
-				}
-				if(key == KeyEvent.VK_LEFT) {
-					gameObject.setVelX(0);
-				}
-			}
+			
 		}
 	}
 	

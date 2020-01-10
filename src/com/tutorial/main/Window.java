@@ -37,7 +37,7 @@ public class Window extends Canvas{
 		//Agregando la clase Game en el frame
 		frame.add(game);
 		frame.setVisible(true);
-		System.out.println("a punto de entrar al juego");
+		//System.out.println("a punto de entrar al juego");
 		game.start();
 	}
 

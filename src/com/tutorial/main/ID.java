@@ -11,9 +11,8 @@ public enum ID {
 	 * ID para el jugador
 	 */
 	Player(),
-	Player2(),
 	/**
 	 * ID para los ebnemigos
 	 */
-	Enemy();
+	BasicEnemy();
 }

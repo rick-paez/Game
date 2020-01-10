@@ -1,6 +1,7 @@
 package com.tutorial.main;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 /**
  * Clase que define todos los objetos de juego
@@ -40,6 +41,7 @@ public abstract class GameObject {
 	 */
 	public abstract void render(Graphics g);
 
+	public abstract Rectangle getBounds();
 	
 	public int getX() {
 		return x;

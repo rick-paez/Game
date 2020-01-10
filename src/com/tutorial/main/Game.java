@@ -4,6 +4,8 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.util.Date;
+import java.util.Random;
 
 
 /**
@@ -18,13 +20,13 @@ public class Game extends Canvas implements Runnable{
 	 */
 	private static final long serialVersionUID = 7580815534084638412L;
 	
-	private static final int WIDTH = 640;
-	private static final int HEIGHT = 640/12 * 9;
+	static final int WIDTH = 640;
+	static final int HEIGHT = 640/12 * 9;
 	private static final String TITLE = "Construyamos un juego";
 	private Thread thread;
 	private boolean running = false;
-	
-	
+	private Random rnd = new Random();
+	private HUD hud;
 	private Handler handler;
 	/**
 	 * Constructor de la clase
@@ -33,9 +35,10 @@ public class Game extends Canvas implements Runnable{
 		handler = new Handler();
 		this.addKeyListener(new KeyInput(handler));
 		new Window(WIDTH, HEIGHT, TITLE, this);
-			
+		hud = new HUD();	
 		handler.addObject(new Player(WIDTH/2-32,HEIGHT/2-32,ID.Player));
-		handler.addObject(new Player(WIDTH/2+64,HEIGHT/2-32,ID.Player2));
+		for(int i = 0;i<20;i++)
+			handler.addObject(new BasicEnemy(rnd.nextInt(WIDTH),rnd.nextInt(HEIGHT),ID.BasicEnemy));
 	}
 	
 	/**
@@ -47,7 +50,7 @@ public class Game extends Canvas implements Runnable{
 		
 		thread.start();
 		running = true;
-		System.out.println(running);
+//		System.out.println(running);
 		
 	}
 	/**
@@ -88,7 +91,8 @@ public class Game extends Canvas implements Runnable{
 			
 			if(System.currentTimeMillis() - timer > 1000) {
 				timer += 1000;
-				//System.out.println("FPS: "+frames);
+				System.out.println("Timer: "+timer);
+				System.out.println("FPS: "+frames);
 				frames = 0;
 			}
 		}
@@ -101,7 +105,7 @@ public class Game extends Canvas implements Runnable{
 		// Creando la estrategia de buffer para renderizar
 		BufferStrategy bs = this.getBufferStrategy();
 		if(bs == null) {
-			this.createBufferStrategy(3);
+			this.createBufferStrategy(2);
 			return;
 		}
 		Graphics g = bs.getDrawGraphics();
@@ -110,6 +114,7 @@ public class Game extends Canvas implements Runnable{
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		
 		handler.render(g);
+		hud.render(g);
 		
 		g.dispose();
 		bs.show();
@@ -119,6 +124,7 @@ public class Game extends Canvas implements Runnable{
 	 */
 	private void tick() {
 		handler.tick();
+		hud.tick();
 	}
 
 	/**
@@ -126,11 +132,19 @@ public class Game extends Canvas implements Runnable{
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		System.out.println("comenzando el juego");
+		//System.out.println("comenzando el juego");
 		new Game();
 	}
 
-	
+	public static int clamp (int var, int min, int max) {
+		if (var >= max)
+			return max;
+		else 
+			if (var <= min)
+				return min;
+			else 
+				return var;
+	}
 
 	
 	
