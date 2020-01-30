@@ -60,4 +60,8 @@ public class Handler {
 		}
 		objectList.removeAll(enemies);
 	}
+	public void clearAll() {
+		
+		objectList.clear();
+	}
 }

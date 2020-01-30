@@ -35,5 +35,6 @@ public enum ID {
 	 * ID para las balas
 	 * del jefe
 	 */
-	EnemyBossBullet();
+	EnemyBossBullet(), 
+	MenuParticle();
 }
